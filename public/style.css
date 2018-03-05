@@ -1,0 +1,192 @@
+/* Fix user-agent */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+}
+
+html, input {
+  font-family:
+    "HelveticaNeue-Light",
+    "Helvetica Neue Light",
+    "Helvetica Neue",
+    Helvetica,
+    Arial,
+    "Lucida Grande",
+    sans-serif;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+  word-wrap: break-word;
+  padding:0;
+}
+
+/* Pages */
+
+.pages {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.page {
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+
+/* Login & Roomcange Pages*/
+
+.login.page, .passcode.page {
+  background-color: #000;
+}
+
+.login.page .form, .passcode.page .form {
+  height: 100px;
+  margin-top: -100px;
+  position: absolute;
+
+  text-align: center;
+  top: 50%;
+  width: 100%;
+  max-width: 100%;
+}
+
+.login.page .form .usernameInput, .passcode.page .form .passcodeInput {
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid #fff;
+  outline: none;
+  padding-bottom: 15px;
+  text-align: center;
+  width: 400px;
+  max-width: 100%;
+}
+
+.login.page .title, .passcode.page .title {
+  font-size: 200%;
+}
+
+.login.page .usernameInput, .passcode.page .passcodeInput {
+  font-size: 200%;
+  letter-spacing: 3px;
+}
+
+.login.page .title, .passcode.page .title, .login.page .usernameInput, .passcode.page .passcodeInput {
+  color: #fff;
+  font-weight: 100;
+}
+
+/* Chat page */
+
+.chat.page {
+  display: none;
+  /* padding: 20px; */
+  max-width:100%;
+}
+.chat.page.feed {
+  display:block;
+}
+
+.chat.page.feed .chatArea {
+  padding: 10px 20px;
+}
+
+/* Font */
+
+.messages {
+  font-size: 350%; /*was 150%*/
+}
+
+.inputMessage {
+  font-size: 100%;
+}
+
+.log {
+  color: gray;
+  font-size: 70%;
+  margin: 5px;
+  text-align: center;
+}
+
+/* Messages */
+
+.chatArea {
+  height: 100%;
+  max-width: 100%;
+  padding: 10px 20px;
+}
+
+.messages {
+  height: 100%;
+  margin: 0;
+  overflow-y: scroll;
+  max-width: 100%;
+}
+
+.message.typing .messageBody {
+  color: gray;
+}
+
+.username {
+  font-weight: 700;
+  overflow: hidden;
+  padding-right: 15px;
+  text-align: right;
+}
+
+/* Input */
+
+.inputMessage {
+  border: 10px solid #000;
+  bottom: 0;
+  height: 60px;
+  left: 0;
+  outline: none;
+  padding-left: 10px;
+  position: absolute;
+  right: 0;
+  width: 100%;
+  max-width: 100%;
+}
+
+@media screen and (max-width: 800px) {
+  .inputMessage {
+    max-width: 800px;
+    width: 100%;
+  }
+}
+
+
+
+/*feed*/
+.feed .roomNum {
+  text-align: center;
+  font-size:80px;
+  font-weight:bold;
+  width:100%;
+  max-width: 100%;
+  position:relative;
+  margin: 0 auto;
+  background: #333;
+  color: white;
+  padding:10px;
+}
+
+.feed .chatArea {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Feed</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+  <ul class="pages">
+    <li class="chat page feed">
+      <div class="roomNum">
+        Room Number - <span class="insertRoomCode"></span>
+      </div>
+      <div class="chatArea">
+        <ul class="messages"></ul>
+      </div>
+    </li>
+  </ul>
+  <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/feed.js"></script>
+</body>
+</html>
