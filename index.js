@@ -6,18 +6,16 @@ var io = require('socket.io')(server);
 var port = process.env.PORT || 4000;
 
 var query;
-console.log("testing - ");
-
 server.listen(port, function(){
   console.log('listening on %d', port);
 });
 
-console.log("what about this?");
 // Routing
 app.use(express.static(path.join(__dirname, 'public')));
 // app.get('/', function(req, res) {
 //   res.sendFile(__dirname + '/index.html');
 // });
+app.use('/webapp', express.static(path.join(__dirname, 'public')));
 
 app.get('/feed', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/feed.html'));

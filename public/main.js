@@ -65,8 +65,6 @@ $(function() {
 
     roomname = roomname.toUpperCase();
 
-    log("Roomname is - " +roomname);
-
     if (roomname) {
       $passcodePage.fadeOut();
       $chatPage.show();
