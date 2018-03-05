@@ -3,14 +3,16 @@ var app = express();
 var path = require('path');
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 4000;
 
 var query;
+console.log("testing - ");
 
 server.listen(port, function(){
   console.log('listening on %d', port);
 });
 
+console.log("what about this?");
 // Routing
 app.use(express.static(path.join(__dirname, 'public')));
 // app.get('/', function(req, res) {
@@ -38,8 +40,6 @@ io.sockets.on('connection', function(socket){
   }
 
   socket.on('room', function(room) {
-    room = room.toUpperCase();
-
     socket.join(room);
   });
 
