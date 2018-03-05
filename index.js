@@ -15,7 +15,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.get('/', function(req, res) {
 //   res.sendFile(__dirname + '/index.html');
 // });
-app.use('/webapp', express.static(path.join(__dirname, 'public')));
+// app.use('/webapp', express.static(path.join(__dirname, 'public')));
 
 app.get('/feed', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/feed.html'));
