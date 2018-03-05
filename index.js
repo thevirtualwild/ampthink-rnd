@@ -90,7 +90,6 @@ io.sockets.on('connection', function(socket){
     ++numUsers;
     addedUser = true;
 
-    chatdata.roomname = chatdata.roomname.toString().toUpperCase();
 
     socket.roomname = chatdata.roomname;
 
