@@ -28,6 +28,7 @@ app.get('/feed', function(req, res) {
 });
 
 app.get('/balljump', function(req, res) {
+  console.log('query - '+req.query);
   res.sendFile(path.join(__dirname + '/public/balljump/index.html'));
   query = req.query.roomId;
   console.log('webapp routing - ' + query);
@@ -96,11 +97,13 @@ io.sockets.on('connection', function(socket){
   socket.on('add user', function(data) {
     if (addedUser) return;
 
+    console.log('add user called - ' + data);
     var chatdata = '';
 
     // if not valid json object, parse
     try {
         chatdata = JSON.parse(data);
+        console.log('chatdata' - chatdata);
     } catch (e) {
         chatdata = data;
     }

@@ -5,10 +5,16 @@ $(function() {
 	var socket = io();
 	var roomcode = 'ballgame';
 
+  var username = 'Balljump';
+  var jsonstring = '{"username":"' + username + '", "roomname":"' + roomcode + '"}';
+
 	function joinQueryRoom(query) {
 		if (query) {
 			roomcode = query;
 		}
+
+		console.log('Query - ' + query);
+		console.log('Roomcode - ' + roomcode);
 
 		roomcode = roomcode.toUpperCase();
 
@@ -16,6 +22,7 @@ $(function() {
 	  $(document).prop('title', 'Ball Game - ' + roomcode);
 
 	  username = 'Balljump' + roomcode;
+		console.log('username - ' + username);
 
 	  jsonstring = '{"username":"' + username + '", "roomname":"' + roomcode + '"}';
 
@@ -24,6 +31,9 @@ $(function() {
 	  socket.emit('add user', jsonstring );
 	}
 
+	function getQuery() {
+		socket.emit('query request');
+	}
 
 	function _game()
 	{
@@ -38,8 +48,6 @@ $(function() {
 			h = getHeight(),
 			assets = [],
 			keyDown = false;
-
-			roomcode = startRoom();
 
 		// holds all collideable objects
 		var collideables = [];
@@ -84,6 +92,12 @@ $(function() {
 			canvas.height = h;
 			document.body.appendChild(canvas);
 
+
+
+					socket.emit('room', roomcode);
+					socket.emit('add user', jsonstring );
+
+
 			// initializing the stage
 			stage = new Stage(canvas);
 			world = new Container();
@@ -116,10 +130,20 @@ $(function() {
 		}
 
 		// Socket listeners
-		socket.on('jump') {
+		socket.on('jump', function(){
 			self.handleKeyDown();
 			keyDown = false;
-		}
+		});
+
+		socket.on('query', function(query) {
+	    console.log('query received - ' + query);
+
+	    joinQueryRoom(query);
+	  });
+
+	  socket.on('use random query', function() {
+	    console.log('no query received starting random');
+	  });
 
 		self.reset = function()
 		{
@@ -215,5 +239,7 @@ $(function() {
 		self.preloadResources();
 	};
 
+	getQuery();
+
 	new _game();
-}
+});
