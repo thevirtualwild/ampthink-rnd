@@ -85,6 +85,13 @@ io.sockets.on('connection', function(socket){
     });
   });
 
+  socket.on('jump ball', function() {
+
+    socket.emit('jump received');
+    console.log('jump ball pressed');
+    socket.broadcast.to(socket.roomname).emit('jump');
+  });
+
   // when the client emits 'add user', this listens and executes
   socket.on('add user', function(data) {
     if (addedUser) return;
