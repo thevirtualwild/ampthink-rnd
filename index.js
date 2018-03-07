@@ -27,6 +27,12 @@ app.get('/feed', function(req, res) {
     console.log('feed routing - ' + query);
 });
 
+app.get('/balljump', function(req, res) {
+  res.sendFile(path.join(__dirname + '/public/balljump/index.html'));
+  query = req.query.roomId;
+  console.log('webapp routing - ' + query);
+});
+
 //Chatroom
 
 var numUsers = 0;
