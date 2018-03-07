@@ -86,11 +86,17 @@ io.sockets.on('connection', function(socket){
     });
   });
 
-  socket.on('jump ball', function() {
+  socket.on('jump key down', function() {
 
-    socket.emit('jump received');
+    socket.emit('jump down received');
     console.log('jump ball pressed');
-    socket.broadcast.to(socket.roomname).emit('jump');
+    socket.broadcast.to(socket.roomname).emit('jump key down');
+  });
+  socket.on('jump key down', function() {
+
+    socket.emit('jump up received');
+    console.log('jump ball released');
+    socket.broadcast.to(socket.roomname).emit('jump key up');
   });
 
   // when the client emits 'add user', this listens and executes
