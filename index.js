@@ -15,7 +15,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.get('/', function(req, res) {
 //   res.sendFile(__dirname + '/index.html');
 // });
-// app.use('/webapp', express.static(path.join(__dirname, 'public')));
+app.get('/webapp', function(req, res) {
+  res.sendFile(path.join(__dirname + '/public/webapp/index.html'));
+  query = req.query.roomId;
+  console.log('webapp routing - ' + query);
+});
 
 app.get('/feed', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/feed.html'));
@@ -64,12 +68,15 @@ io.sockets.on('connection', function(socket){
       username: socket.username,
       message: data
     });
-    //
-    // console.log('testmessage sent');
-    // io.sockets.to('nooneshouldget').emit('chat message', {
-    //   username: socket.username,
-    //   message: 'test'
-    // });
+  });
+
+  socket.on('any other action', function(someaction) {
+
+    socket.emit('action received', 'We receieved our action thanks!');
+    socket.broadcast.to(socket.roomname).emit('do action', {
+      username: socket.username,
+      action: someaction
+    });
   });
 
   // when the client emits 'add user', this listens and executes
@@ -106,27 +113,6 @@ io.sockets.on('connection', function(socket){
       numUsers: numUsers
     });
   });
-
-  // try setting room, we broadcast it to others
-  // socket.on('set room', function (roomname) {
-  //   console.log('new room set to ',roomname);
-  //   socket.room = roomname;
-  //
-  //   socket.join(socket.room);
-  //
-  //   socket.emit('change room', {
-  //     roomname: socket.room,
-  //     numUsers: numUsers
-  //   });
-  //
-  //   //echo to the existing participants in roomname
-  //   socket.broadcast.in(socket.room).emit('user joined', {
-  //     username: socket.username,
-  //     numUsers: numUsers
-  //   });
-  // });
-
-
 
   // when the client emits 'typing', we broadcast it to others
   socket.on('typing', function () {

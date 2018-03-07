@@ -213,6 +213,10 @@ $(function() {
     return COLORS[index];
   }
 
+  function doAction (data) {
+    console.log('User - ' + data.username + ' wants to do - ' + data.action);
+  }
+
   // Socket events
 
   socket.on('room joined', function (data) {
@@ -223,6 +227,11 @@ $(function() {
   socket.on('chat message', function (data) {
     // log('message received');
     addChatMessage(data);
+  });
+
+  socket.on('do action', function (data) {
+
+    doAction(data);
   });
 
   // Whenever the server emits 'user joined', log it in the chat body
