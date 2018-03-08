@@ -27,3 +27,37 @@ function spliceKey(somekey) {
   console.log('splicing key - ' + somekey);
   activeKeys.splice(somekey);
 }
+
+function keydown(somekey) {
+  //lookup the key pressed and save it to the active keys array
+  for (var key in keys) {
+    if(keys.hasOwnProperty(key) && somekey.keyCode === keys[key]) {
+      if(activeKeys.indexOf(key) < 0) {
+        activeKeys.push(key);
+      }
+    }
+  }
+
+  //execute the first callback the longest key binding that matches the active keys
+  return executeActiveKeyBindings(event);
+}
+
+function keyup(somekey) {
+  //lookup the key released and prune it from the active keys array
+  for(var key in keys) {
+    if(keys.hasOwnProperty(key) && somekey.keyCode === keys[key]) {
+
+      var iAK = activeKeys.indexOf(key);
+
+      if(iAK > -1) {
+        activeKeys.splice(iAK, 1);
+      }
+    }
+  }
+
+  //execute the end callback on the active key binding
+  return pruneActiveKeyBindings(event);
+}
+
+//execute the first callback the longest key binding that matches the active keys
+return executeActiveKeyBindings(event);
