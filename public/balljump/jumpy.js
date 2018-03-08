@@ -133,10 +133,10 @@ $(function() {
 		socket.on('jump key down', function(){
 			console.log('jump down');
 			self.handleKeyDown();
-			keyDown = false;
 		});
 		// Socket listeners
 		socket.on('jump key up', function(){
+			console.log('jump up');
 			self.handleKeyUp();
 		});
 
@@ -177,7 +177,6 @@ $(function() {
 		self.tick = function(e)
 		{
 			ticks++;
-			console.log(ticks);
 			hero.tick();
 
 			if ( hero.y > h*3 ) {
