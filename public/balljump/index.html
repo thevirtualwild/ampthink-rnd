@@ -1,16 +1,34 @@
 <html>
 	<head>
-		<title>jumpy</title>
+		<title>jumpy input</title>
 		<link rel="stylesheet" href="style.css" type="text/css" />
 	</head>
 	<body>
-
+		<button id="jumpbutton">Jump Please!</button>
 	</body>
 
   <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
   <script src="../socket.io/socket.io.js"></script>
-	<script src="easeljs-0.4.2.min.js"></script>
-	<script src="utils.js"></script>
-	<script src="hero.js"></script>
-	<script src="jumpy.js"></script>
+	<script>
+		var socket = io();
+		var $jumpButton = $('#jumpbutton'); //Jump Button
+
+		var roomname = 'BALLGAME';
+		var username = "GameButton";
+		var jsonstring = '{"username":"' + username + '", "roomname":"' + roomname + '"}';
+
+		// Tell the server your new room to connect to
+		socket.emit('room', roomname);
+		socket.emit('add user', jsonstring);
+
+		$jumpButton.mousedown(function() {
+			console.log('mouse down');
+			socket.emit('jump key down');
+		});
+
+		$jumpButton.mouseup(function() {
+			console.log('mouse up');
+			socket.emit('jump key up');
+		});
+	</script>
 </html>

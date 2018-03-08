@@ -3,7 +3,7 @@ $(function() {
 			PLATFORM_IMAGE = 'platform.png';
 
 	var socket = io();
-	var roomcode = 'ballgame';
+	var roomcode = 'BALLGAME';
 
   var username = 'Balljump';
   var jsonstring = '{"username":"' + username + '", "roomname":"' + roomcode + '"}';
@@ -131,7 +131,9 @@ $(function() {
 
 		// Socket listeners
 		socket.on('jump key down', function(){
+			console.log('jump down');
 			self.handleKeyDown();
+			keyDown = false;
 		});
 		// Socket listeners
 		socket.on('jump key up', function(){

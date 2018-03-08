@@ -92,7 +92,7 @@ io.sockets.on('connection', function(socket){
     console.log('jump ball pressed');
     socket.broadcast.to(socket.roomname).emit('jump key down');
   });
-  socket.on('jump key down', function() {
+  socket.on('jump key up', function() {
 
     socket.emit('jump up received');
     console.log('jump ball released');
