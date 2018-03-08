@@ -324,16 +324,17 @@
 
                 socket.on('key down', function(data) {
 
+                  console.log('key pressed - ' + data)
                   console.log('KEY DOWN - ' + axis);
 
                   if (data == 'up') {
-                    axisY += 1;
+                    axisY = 1;
                   } else if (data == 'down') {
-                    axisY -= 1;
+                    axisY = -1;
                   } else if (data == 'right') {
-                    axisX += 1;
+                    axisX = 1;
                   } else if (data == 'left') {
-                    axisX -= 1;
+                    axisX = -1;
                   }
 
                   axis = [axisX, axisY];
@@ -349,13 +350,13 @@
                   console.log('KEY UP - ' + axis);
 
                   if (data == 'up') {
-                    axisY -= 1;
+                    axisY = 0;
                   } else if (data == 'down') {
-                    axisY += 1;
+                    axisY = 0;
                   } else if (data == 'right') {
-                    axisX -= 1;
+                    axisX = 0;
                   } else if (data == 'left') {
-                    axisX += 1;
+                    axisX = 0;
                   }
 
                   axis = [axisX, axisY];
