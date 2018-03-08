@@ -86,8 +86,8 @@ io.sockets.on('connection', function(socket){
     });
   });
 
+//Balljump
   socket.on('jump key down', function() {
-
     socket.emit('jump down received');
     console.log('jump ball pressed');
     socket.broadcast.to(socket.roomname).emit('jump key down');
@@ -98,6 +98,22 @@ io.sockets.on('connection', function(socket){
     console.log('jump ball released');
     socket.broadcast.to(socket.roomname).emit('jump key up');
   });
+
+
+//asstray
+  socket.on('key up', function(keyname) {
+    socket.emit('key released');
+    console.log('key released - ' + keyname );
+    console.log('keyup roomname - ' + socket.roomname);
+    socket.broadcast.to(socket.roomname).emit('key up', keyname);
+  });
+  socket.on('key down', function(keyname) {
+    socket.emit('key pressed');
+    console.log('key pressed - ' + keyname);
+    console.log('keydown roomname - ' + socket.roomname);
+    socket.broadcast.to(socket.roomname).emit('key down', keyname);
+  });
+
 
   // when the client emits 'add user', this listens and executes
   socket.on('add user', function(data) {
