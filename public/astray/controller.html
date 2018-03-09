@@ -1,0 +1,72 @@
+<html>
+	<head>
+	  <meta charset="UTF-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>jumpy input</title>
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	</head>
+	<body>
+		<div class="button-container">
+      <button id="upButton" class="btn btn-primary">Up Please!</button>
+      <button id="downButton" class="btn btn-primary">down Please!</button>
+      <button id="leftButton" class="btn btn-primary">left Please!</button>
+      <button id="rightButton" class="btn btn-primary">right Please!</button>
+		</div>
+	</body>
+
+  <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="../socket.io/socket.io.js"></script>
+	<script>
+		var socket = io();
+		var $upButton = $('#upButton');
+    var $downButton = $('#downButton');
+    var $leftButton = $('#leftButton');
+    var $rightButton = $('#rightButton');
+
+		var roomname = 'ASTRAY';
+		var username = "Controller";
+		var jsonstring = '{"username":"' + username + '", "roomname":"' + roomname + '"}';
+
+		// Tell the server your new room to connect to
+		socket.emit('room', roomname);
+		socket.emit('add user', jsonstring);
+
+		$upButton.mousedown(function() {
+			console.log('key down up');
+			socket.emit('key down', 'up');
+		});
+		$upButton.mouseup(function() {
+			console.log('key up up');
+			socket.emit('key up', 'up');
+		});
+
+    $downButton.mousedown(function() {
+			console.log('mouse down');
+			socket.emit('key down', 'down');
+		});
+		$downButton.mouseup(function() {
+			console.log('mouse up');
+			socket.emit('key up', 'down');
+		});
+
+    $leftButton.mousedown(function() {
+			console.log('mouse down');
+			socket.emit('key down', 'left');
+		});
+		$leftButton.mouseup(function() {
+			console.log('mouse up');
+			socket.emit('key up', 'left');
+		});
+
+    $rightButton.mousedown(function() {
+			console.log('right down');
+			socket.emit('key down', 'right');
+		});
+		$rightButton.mouseup(function() {
+			console.log('mouse up');
+			socket.emit('key up', 'right');
+		});
+
+
+	</script>
+</html>

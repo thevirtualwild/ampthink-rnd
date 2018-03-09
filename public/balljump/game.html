@@ -1,0 +1,21 @@
+<html>
+	<head>
+	  <meta charset="UTF-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>jumpy game</title>
+		<link rel="stylesheet" href="style.css" type="text/css" />
+		<script>
+			javascript:(function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='//rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()
+		</script>
+	</head>
+	<body class="gamecontainer">
+
+	</body>
+
+  <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="../socket.io/socket.io.js"></script>
+	<script src="easeljs-0.4.2.min.js"></script>
+	<script src="utils.js"></script>
+	<script src="hero.js"></script>
+	<script src="jumpy.js"></script>
+</html>

@@ -1,0 +1,31 @@
+* {
+  padding: 0px;
+  border: 0px;
+  margin: 0px;
+}
+
+body.gamecontainer {
+  background-image: linear-gradient(bottom, rgb(37,9,115) 40%, rgb(101,60,176) 0%);
+  background-image: -o-linear-gradient(bottom, rgb(37,9,115) 40%, rgb(101,60,176) 0%);
+  background-image: -moz-linear-gradient(bottom, rgb(37,9,115) 40%, rgb(101,60,176) 0%);
+  background-image: -webkit-linear-gradient(bottom, rgb(37,9,115) 40%, rgb(101,60,176) 0%);
+  background-image: -ms-linear-gradient(bottom, rgb(37,9,115) 40%, rgb(101,60,176) 0%);
+
+  background-image: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(0.4, rgb(37,9,115)),
+    color-stop(0, rgb(101,60,176))
+  );
+}
+
+
+body .button-container {
+  margin: 20px auto;
+  width: 300px;
+  max-width: 100%;
+  border: 1px solid #333;
+  padding: 40px;
+  text-align:center;
+}

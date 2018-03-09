@@ -1,0 +1,39 @@
+<html>
+	<head>
+	  <meta charset="UTF-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>jumpy input</title>
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="style.css" type="text/css" />
+	</head>
+	<body>
+		<div class="button-container">
+			<button id="jumpbutton" class="btn btn-primary">Jump Please!</button>
+		</div>
+	</body>
+
+  <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="../socket.io/socket.io.js"></script>
+	<script>
+		var socket = io();
+		var $jumpButton = $('#jumpbutton'); //Jump Button
+
+		var roomname = 'BALLGAME';
+		var username = "GameButton";
+		var jsonstring = '{"username":"' + username + '", "roomname":"' + roomname + '"}';
+
+		// Tell the server your new room to connect to
+		socket.emit('room', roomname);
+		socket.emit('add user', jsonstring);
+
+		$jumpButton.mousedown(function() {
+			console.log('mouse down');
+			socket.emit('jump key down');
+		});
+
+		$jumpButton.mouseup(function() {
+			console.log('mouse up');
+			socket.emit('jump key up');
+		});
+	</script>
+</html>

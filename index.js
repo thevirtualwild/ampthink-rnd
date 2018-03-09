@@ -15,12 +15,23 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.get('/', function(req, res) {
 //   res.sendFile(__dirname + '/index.html');
 // });
-// app.use('/webapp', express.static(path.join(__dirname, 'public')));
+app.get('/webapp', function(req, res) {
+  res.sendFile(path.join(__dirname + '/public/webapp/index.html'));
+  query = req.query.roomId;
+  console.log('webapp routing - ' + query);
+});
 
 app.get('/feed', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/feed.html'));
     query = req.query.roomId;
     console.log('feed routing - ' + query);
+});
+
+app.get('/balljump', function(req, res) {
+  console.log('query - '+req.query);
+  res.sendFile(path.join(__dirname + '/public/balljump/index.html'));
+  query = req.query.roomId;
+  console.log('webapp routing - ' + query);
 });
 
 //Chatroom
@@ -64,23 +75,57 @@ io.sockets.on('connection', function(socket){
       username: socket.username,
       message: data
     });
-    //
-    // console.log('testmessage sent');
-    // io.sockets.to('nooneshouldget').emit('chat message', {
-    //   username: socket.username,
-    //   message: 'test'
-    // });
   });
+
+  socket.on('any other action', function(someaction) {
+
+    socket.emit('action received', 'We receieved our action thanks!');
+    socket.broadcast.to(socket.roomname).emit('do action', {
+      username: socket.username,
+      action: someaction
+    });
+  });
+
+//Balljump
+  socket.on('jump key down', function() {
+    socket.emit('jump down received');
+    console.log('jump ball pressed');
+    socket.broadcast.to(socket.roomname).emit('jump key down');
+  });
+  socket.on('jump key up', function() {
+
+    socket.emit('jump up received');
+    console.log('jump ball released');
+    socket.broadcast.to(socket.roomname).emit('jump key up');
+  });
+
+
+//asstray
+  socket.on('key up', function(keyname) {
+    socket.emit('key released');
+    console.log('key released - ' + keyname );
+    console.log('keyup roomname - ' + socket.roomname);
+    socket.broadcast.to(socket.roomname).emit('key up', keyname);
+  });
+  socket.on('key down', function(keyname) {
+    socket.emit('key pressed');
+    console.log('key pressed - ' + keyname);
+    console.log('keydown roomname - ' + socket.roomname);
+    socket.broadcast.to(socket.roomname).emit('key down', keyname);
+  });
+
 
   // when the client emits 'add user', this listens and executes
   socket.on('add user', function(data) {
     if (addedUser) return;
 
+    console.log('add user called - ' + data);
     var chatdata = '';
 
     // if not valid json object, parse
     try {
         chatdata = JSON.parse(data);
+        console.log('chatdata' - chatdata);
     } catch (e) {
         chatdata = data;
     }
@@ -106,27 +151,6 @@ io.sockets.on('connection', function(socket){
       numUsers: numUsers
     });
   });
-
-  // try setting room, we broadcast it to others
-  // socket.on('set room', function (roomname) {
-  //   console.log('new room set to ',roomname);
-  //   socket.room = roomname;
-  //
-  //   socket.join(socket.room);
-  //
-  //   socket.emit('change room', {
-  //     roomname: socket.room,
-  //     numUsers: numUsers
-  //   });
-  //
-  //   //echo to the existing participants in roomname
-  //   socket.broadcast.in(socket.room).emit('user joined', {
-  //     username: socket.username,
-  //     numUsers: numUsers
-  //   });
-  // });
-
-
 
   // when the client emits 'typing', we broadcast it to others
   socket.on('typing', function () {
