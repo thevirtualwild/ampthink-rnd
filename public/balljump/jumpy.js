@@ -3,7 +3,7 @@ $(function() {
 			PLATFORM_IMAGE = 'platform.png';
 
 	var socket = io();
-	var roomcode = 'ballgame';
+	var roomcode = 'BALLGAME';
 
   var username = 'Balljump';
   var jsonstring = '{"username":"' + username + '", "roomname":"' + roomcode + '"}';
@@ -131,10 +131,12 @@ $(function() {
 
 		// Socket listeners
 		socket.on('jump key down', function(){
+			console.log('jump down');
 			self.handleKeyDown();
 		});
 		// Socket listeners
 		socket.on('jump key up', function(){
+			console.log('jump up');
 			self.handleKeyUp();
 		});
 
@@ -175,7 +177,6 @@ $(function() {
 		self.tick = function(e)
 		{
 			ticks++;
-			console.log(ticks);
 			hero.tick();
 
 			if ( hero.y > h*3 ) {
