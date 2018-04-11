@@ -28,6 +28,7 @@ app.get('/feed', function(req, res) {
 });
 
 app.get('/boop', function(req, res) {
+    console.log('boop?');
     res.sendFile(path.join(__dirname + '/public/feed.html'));
     query = req.query.roomId;
     console.log('feed routing - ' + query);
