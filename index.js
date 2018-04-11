@@ -34,13 +34,13 @@ app.get('/boop', function(req, res) {
     console.log('feed routing - ' + query);
 });
 
-// app.get('/refeed', function(req, res) {
-//   var randlist = ['pink','mint','orange'];
-//   var randquery = randlist[ Math.floor(Math.random()*randlist.length) ];
-//   res.redirect('/feed?roomId=' + randquery);
-//   query = req.query.roomId;
-//   console.log('query - ' + query);
-// });
+app.get('/refeed', function(req, res) {
+  var randlist = ['pink','mint','orange'];
+  var randquery = randlist[ Math.floor(Math.random()*randlist.length) ];
+  res.redirect('/feed?roomId=' + randquery);
+  query = req.query.roomId;
+  console.log('query - ' + query);
+});
 
 app.get('/balljump', function(req, res) {
   console.log('query - '+req.query);
